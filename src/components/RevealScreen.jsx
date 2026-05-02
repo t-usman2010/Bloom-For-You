@@ -87,7 +87,11 @@ const RevealScreen = memo(function RevealScreen({ answers, onRestart }) {
               </div>
             </div>
           </div>
-          <div className="flex flex-wrap gap-4">
+        </div>
+        <div className="glass-panel canvas-frame p-3 md:p-5">
+          <BouquetSvg answers={answers} message={message} svgRef={svgRef} />
+        </div>
+        <div className="flex flex-wrap gap-4">
             <button type="button" className="btn-primary" onClick={handleDownload}>
               Download bouquet
             </button>
@@ -95,10 +99,7 @@ const RevealScreen = memo(function RevealScreen({ answers, onRestart }) {
               Make another
             </button>
           </div>
-        </div>
-        <div className="glass-panel canvas-frame p-3 md:p-5">
-          <BouquetSvg answers={answers} message={message} svgRef={svgRef} />
-        </div>
+          <br />
       </div>
     </motion.section>
   )
