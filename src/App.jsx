@@ -5,7 +5,7 @@ import LoadingScreen from './components/LoadingScreen'
 import RevealScreen from './components/RevealScreen'
 import PetalParticles from './components/PetalParticles'
 import questions from './data/questions'
-import Footer from './components/Footer'
+import Footer from './components/footer'
 import './App.css'
 
 const createEmptyAnswers = () => Array(questions.length).fill(null)
