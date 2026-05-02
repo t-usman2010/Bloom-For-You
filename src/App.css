@@ -1,0 +1,198 @@
+.app-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+  overflow: hidden;
+}
+
+.app-shell::before {
+  content: '';
+  position: fixed;
+  inset: -20vh;
+  background:
+    radial-gradient(600px 420px at 80% 18%, rgba(247, 203, 209, 0.14), transparent 60%),
+    radial-gradient(520px 520px at 10% 12%, rgba(230, 185, 169, 0.12), transparent 58%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.petal-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.75;
+}
+
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.28;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.3'/%3E%3C/svg%3E");
+  mix-blend-mode: soft-light;
+}
+
+.content-layer {
+  position: relative;
+  z-index: 3;
+  flex: 1;
+  display: flex;
+  min-height: 0;
+}
+
+.petal-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 60% 60% 60% 0;
+  background: radial-gradient(circle at 30% 30%, #f9dbe2 0%, #f7cbd1 45%, #e6b9a9 100%);
+  box-shadow: 0 0 18px rgba(247, 203, 209, 0.65);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 4;
+}
+
+.petal-cursor.visible {
+  opacity: 0.9;
+}
+
+.loading-bloom {
+  width: 140px;
+  height: 140px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 35% 30%, #f9dbe2 0%, #f7cbd1 35%, rgba(247, 203, 209, 0.25) 60%, transparent 70%);
+  position: relative;
+  margin: 0 auto 24px;
+  animation: bloomPulse 1.8s ease-in-out infinite;
+}
+
+.loading-bloom::before {
+  content: '';
+  position: absolute;
+  inset: 22px;
+  border-radius: 999px;
+  border: 1px dashed rgba(249, 244, 239, 0.5);
+  animation: bloomSpin 5s linear infinite;
+}
+
+.canvas-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  max-height: 560px;
+  border-radius: 28px;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 35%, rgba(255, 255, 255, 0.06), transparent 70%);
+}
+
+.canvas-frame canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.canvas-frame svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.app-footer {
+  margin: 0 auto;
+  display: flex;
+  width: min(100%, 920px);
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  border-radius: 999px;
+  border-color: rgba(255, 255, 255, 0.16);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.06)),
+    rgba(18, 11, 19, 0.72);
+  padding: 0.95rem 1.25rem;
+  backdrop-filter: blur(18px);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.18);
+  text-align: center;
+}
+
+.app-footer__label {
+  font-size: 0.7rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(249, 244, 239, 0.6);
+}
+
+.app-footer__name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cream);
+  text-shadow: 0 0 24px rgba(247, 203, 209, 0.22);
+}
+
+.bouquet-svg .butterfly {
+  animation: butterflyFloat 4.5s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.bouquet-svg .sparkle {
+  animation: sparklePulse 3.2s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes butterflyFloat {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(4deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+@keyframes sparklePulse {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes bloomPulse {
+  0% {
+    transform: scale(0.92);
+    box-shadow: 0 0 0 rgba(247, 203, 209, 0);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 0 40px rgba(247, 203, 209, 0.35);
+  }
+  100% {
+    transform: scale(0.92);
+    box-shadow: 0 0 0 rgba(247, 203, 209, 0);
+  }
+}
+
+@keyframes bloomSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
